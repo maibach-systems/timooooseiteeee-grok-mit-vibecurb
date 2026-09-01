@@ -246,6 +246,101 @@
       .hero-subject { width: min(50vw, 92dvh); }
       .hero-copy { max-width: 38rem; }
     }
+    .problem {
+      position: relative;
+      z-index: 4;
+      background: #100c0c;
+      color: var(--bone-hex);
+      padding: clamp(4.5rem, 10vh, 8rem) clamp(1.25rem, 4vw, 3.25rem);
+      border-top: 1px solid color-mix(in oklab, var(--bone-hex) 8%, transparent);
+    }
+    .problem-inner { max-width: 68rem; margin: 0 auto; }
+    .problem-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: clamp(1.5rem, 3vh, 2.4rem);
+    }
+    .problem-mark {
+      font-size: clamp(2.4rem, 7vw, 6.1rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+      max-width: 16ch;
+      text-wrap: balance;
+    }
+    .problem-mark em {
+      font-style: normal;
+      color: color-mix(in oklab, var(--bone-hex) 55%, var(--stone));
+      display: block;
+    }
+    .problem-body {
+      margin-top: clamp(2rem, 4.5vh, 3.25rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 36ch;
+    }
+    .problem-body p {
+      font-size: clamp(1rem, 1.35vw, 1.2rem);
+      line-height: 1.5;
+      letter-spacing: -0.015em;
+      color: color-mix(in oklab, var(--bone-hex) 78%, var(--stone));
+    }
+    .film {
+      position: relative;
+      z-index: 4;
+      background: var(--ink-hex);
+      color: var(--bone-hex);
+      padding: clamp(4rem, 9vh, 7rem) clamp(1.25rem, 4vw, 3.25rem) clamp(5rem, 11vh, 8.5rem);
+    }
+    .film-inner { max-width: 56rem; margin: 0 auto; }
+    .film-copy {
+      max-width: 28rem;
+      margin-bottom: clamp(1.75rem, 4vh, 2.75rem);
+    }
+    .film-title {
+      font-size: clamp(1.85rem, 3.4vw, 2.85rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: 1rem;
+    }
+    .film-sub {
+      font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+      line-height: 1.55;
+      color: var(--stone);
+      max-width: 38ch;
+    }
+    .film-plate {
+      position: relative;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid color-mix(in oklab, var(--bone-hex) 10%, transparent);
+    }
+    .film-plate video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: center top;
+      background: #000;
+    }
+    .film-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.85rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    @media (max-width: 767px) {
+      .problem-body { max-width: none; }
+      .film-caption { flex-direction: column; gap: 0.35rem; }
+    }
   </style>
 </head>
 <body>
@@ -279,6 +374,34 @@
         <li>Keine Reichweite, die jedem gehört. Eine Zielgruppe, die nur dir vertraut.</li>
       </ul>
       <a class="cta rise" href="#gespraech">Erstgespräch buchen</a>
+    </div>
+  </section>
+  <section class="problem" id="problem" aria-label="Problem">
+    <div class="problem-inner">
+      <p class="problem-eyebrow">Warum es nie nach dir klingt</p>
+      <h2 class="problem-mark">Du hast delegiert.<em>Es klingt trotzdem nicht nach dir.</em></h2>
+      <div class="problem-body">
+        <p>Marketing, das weiss, wer du bist, und nicht bei jedem Post wieder fragt.</p>
+        <p>Content erstellen geht dir auf die Nerven. Zu Recht.</p>
+        <p>Nicht weil Schreiben schwer ist.</p>
+      </div>
+    </div>
+  </section>
+  <section class="film" id="gespraech" aria-label="Gespräch">
+    <div class="film-inner">
+      <div class="film-copy">
+        <h2 class="film-title">Du musst das nicht glauben.</h2>
+        <p class="film-sub">Setz dich kurz. Ich geh das mit dir durch. Warum es nie nach dir klingt. Und was sich ändert, wenn eine Grundlage mitlernt.</p>
+      </div>
+      <div class="film-plate">
+        <video controls playsinline preload="metadata" poster="poster.jpg" aria-label="Timo Maibach, Maibach Systems">
+          <source src="idle.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <div class="film-caption">
+        <span>Timo Maibach</span>
+        <span>Grundlage</span>
+      </div>
     </div>
   </section>
   <div class="grain" aria-hidden="true"></div>
