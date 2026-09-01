@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maibach Systems</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: oklch(0.12 0.01 25);
+      --ink-hex: #080606;
+      --surface: oklch(0.18 0.022 25);
+      --bone: oklch(0.93 0.012 80);
+      --bone-hex: #ece7df;
+      --stone: oklch(0.58 0.025 40);
+      --blood: oklch(0.42 0.17 25);
+      --blood-hex: #940015;
+      --systems: #c6354d;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--ink-hex);
+      color: var(--bone-hex);
+      font-family: "Satoshi", "Geist", ui-sans-serif, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    body { overflow-x: hidden; }
+    .hero {
+      position: relative;
+      min-height: 100dvh;
+      overflow: hidden;
+      background: var(--ink-hex);
+      color: var(--bone-hex);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 48% 58% at 16% 72%, oklch(0.42 0.17 25 / 0.10) 0%, transparent 68%),
+        radial-gradient(ellipse 55% 45% at 28% 38%, oklch(0.93 0.012 80 / 0.025) 0%, transparent 70%);
+    }
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .hero-subject {
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: min(64vw, 110dvh);
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .hero-subject video,
+    .hero-subject img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-subject img { display: none; }
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        var(--ink-hex) 0%,
+        var(--ink-hex) 32%,
+        color-mix(in oklab, var(--ink-hex) 78%, transparent) 46%,
+        color-mix(in oklab, var(--ink-hex) 28%, transparent) 64%,
+        transparent 82%
+      );
+    }
+    .nav {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 3.25rem);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--bone-hex);
+    }
+    .brand-signet {
+      width: 2.1rem;
+      height: 1.55rem;
+      color: var(--bone-hex);
+      flex: none;
+    }
+    .brand-word { display: flex; flex-direction: column; line-height: 1; }
+    .brand-word .maibach {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .brand-word .systems {
+      margin-top: 0.22rem;
+      font-size: 0.52rem;
+      font-weight: 500;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--systems);
+    }
+    .nav-meta {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: calc(100dvh - 6rem);
+      padding: 0 clamp(1.25rem, 4vw, 3.25rem) clamp(1.75rem, 4.5vh, 3.25rem);
+      max-width: 44rem;
+    }
+    .lead {
+      max-width: 30ch;
+      font-size: clamp(1.12rem, 1.55vw, 1.42rem);
+      font-weight: 400;
+      line-height: 1.45;
+      letter-spacing: -0.018em;
+      color: color-mix(in oklab, var(--bone-hex) 86%, var(--stone));
+    }
+    .mark {
+      margin-top: clamp(1.5rem, 3.2vh, 2.4rem);
+      font-size: clamp(2.6rem, 6.2vw, 5.25rem);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 0.88;
+      color: var(--bone-hex);
+      text-wrap: balance;
+      max-width: 10ch;
+    }
+    .rail {
+      list-style: none;
+      margin-top: clamp(1.35rem, 2.8vh, 2.1rem);
+      max-width: 42ch;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .rail li {
+      font-size: clamp(0.78rem, 0.92vw, 0.9rem);
+      line-height: 1.45;
+      color: var(--stone);
+      letter-spacing: -0.01em;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: clamp(1.6rem, 3.2vh, 2.4rem);
+      min-height: 44px;
+      padding: 0.95rem 1.7rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--blood-hex);
+      color: var(--bone-hex);
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      width: fit-content;
+      cursor: pointer;
+      transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+    }
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px oklch(0.42 0.17 25 / 0.32);
+    }
+    .cta:active { transform: translateY(0) scale(0.98); }
+    .rise {
+      opacity: 0;
+      transform: translateY(22px);
+      animation: rise 0.55s var(--ease) forwards;
+    }
+    .hero-subject { opacity: 0; animation: fade 0.7s var(--ease) forwards; }
+    .lead { animation-delay: 0.08s; }
+    .mark { animation-delay: 0.16s; }
+    .rail { animation-delay: 0.26s; }
+    .cta  { animation-delay: 0.34s; }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-subject, .rise, .cta {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .hero-subject video { display: none; }
+      .hero-subject img { display: block; }
+      .cta:hover, .cta:active { transform: none; box-shadow: none; }
+    }
+    @media (max-width: 767px) {
+      .hero { display: flex; flex-direction: column; }
+      .hero-subject {
+        position: relative;
+        width: 100%;
+        height: 46vh;
+        min-height: 16rem;
+        inset: auto;
+      }
+      .hero-scrim {
+        background:
+          linear-gradient(180deg, color-mix(in oklab, var(--ink-hex) 55%, transparent) 0%, transparent 28%),
+          linear-gradient(180deg, transparent 48%, color-mix(in oklab, var(--ink-hex) 40%, transparent) 72%, var(--ink-hex) 100%);
+      }
+      .nav { position: absolute; top: 0; left: 0; right: 0; }
+      .nav-meta { display: none; }
+      .hero-copy {
+        min-height: 0;
+        flex: 1;
+        justify-content: flex-start;
+        padding-top: 0.25rem;
+        max-width: none;
+      }
+      .lead { max-width: 38ch; }
+      .mark { max-width: none; }
+    }
+    @media (min-width: 768px) and (max-width: 1100px) {
+      .hero-subject { width: min(50vw, 92dvh); }
+      .hero-copy { max-width: 38rem; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero" aria-label="Maibach Systems">
+    <div class="hero-subject">
+      <video id="idle" muted autoplay loop playsinline preload="metadata" poster="poster.jpg" aria-hidden="true">
+        <source src="idle.mp4" type="video/mp4" />
+      </video>
+      <img src="poster.jpg" alt="" width="960" height="960" />
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <header class="nav">
+      <a class="brand" href="#top" aria-label="Maibach Systems">
+        <svg class="brand-signet" viewBox="0 0 1000 733.1" aria-hidden="true">
+          <path fill="currentColor" d="M934.2 287.4 766.9 475.1 766.9 729.5 934.2 729.5ZM64.1 287.4 64.1 729.5 231.3 729.5 231.3 475.1ZM0.0 0.0 64.1 65.8 64.1 163.7 201.1 309.6 500.0 642.4 750.9 361.2 934.2 163.7 934.2 65.8 998.2 0.0 823.8 0.0 500.0 392.4 480.4 371.9 302.5 149.5 177.9 0.0Z"/>
+        </svg>
+        <span class="brand-word">
+          <span class="maibach">Maibach</span>
+          <span class="systems">Systems</span>
+        </span>
+      </a>
+      <span class="nav-meta">Grundlage</span>
+    </header>
+    <div class="hero-copy">
+      <p class="lead rise">Wie dein Marketing mitlernt, statt bei jedem Chat, jedem Mitarbeiter und jeder Agentur von vorne zu beginnen. Ohne dass du weiter jeden Satz geradebiegst, den jemand anders in deinem Namen geschrieben hat.</p>
+      <h1 class="mark rise">Eine Wahrheit.</h1>
+      <ul class="rail rise">
+        <li>Agentur, Team und Sales sprechen dieselbe Sprache wie du.</li>
+        <li>Was du korrigierst, verbessert den nächsten Text. Nicht den nächsten Freelancer.</li>
+        <li>Mehr Content, ohne dass du die Integrationsstelle bleibst.</li>
+        <li>Keine Reichweite, die jedem gehört. Eine Zielgruppe, die nur dir vertraut.</li>
+      </ul>
+      <a class="cta rise" href="#gespraech">Erstgespräch buchen</a>
+    </div>
+  </section>
+  <div class="grain" aria-hidden="true"></div>
+  <script>
+    (function () {
+      const video = document.getElementById("idle");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+      function applyMotion() {
+        if (!video) return;
+        if (reduce.matches) {
+          video.pause();
+          video.removeAttribute("autoplay");
+        } else {
+          const play = video.play();
+          if (play && typeof play.catch === "function") play.catch(function () {});
+        }
+      }
+      applyMotion();
+      if (reduce.addEventListener) reduce.addEventListener("change", applyMotion);
+    })();
+  </script>
+</body>
+</html>
